@@ -193,8 +193,9 @@ void UpdateCheckerImpl::CheckForUpdatesHelper(
 #endif
 
   auto urls(config_->UpdateUrl());
-  if (IsEncryptionRequired(components))
-    RemoveUnsecureUrls(&urls);
+  // TODO(tholcombe): removing https check for testing.
+  // if (IsEncryptionRequired(components))
+  //   RemoveUnsecureUrls(&urls);
 
   // Components in this update check are either all foreground, or all
   // background since this member is inherited from the component's update

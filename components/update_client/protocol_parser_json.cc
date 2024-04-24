@@ -317,13 +317,14 @@ bool ProtocolParserJSON::DoParse(const std::string& response_json,
 
   // The JSON response contains a prefix to prevent XSSI.
   constexpr char kJSONPrefix[] = ")]}'";
-  if (!base::StartsWith(response_json, kJSONPrefix,
-                        base::CompareCase::SENSITIVE)) {
-    ParseError("Missing secure JSON prefix.");
-    return false;
-  }
+  // TODO(tholcombe):Removing json prefix check for testing.
+  // if (!base::StartsWith(response_json, kJSONPrefix,
+  //                       base::CompareCase::SENSITIVE)) {
+  //   ParseError("Missing secure JSON prefix.");
+  //   return false;
+  // }
   const auto doc = base::JSONReader::Read(base::MakeStringPiece(
-      response_json.begin() + std::char_traits<char>::length(kJSONPrefix),
+      response_json.begin(),// + std::char_traits<char>::length(kJSONPrefix),
       response_json.end()));
   if (!doc) {
     ParseError("JSON read error.");

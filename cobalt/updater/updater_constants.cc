@@ -21,8 +21,11 @@ const char kLoggingModuleSwitch[] = "vmodule";
 
 const char kUpdaterJSONDefaultUrlQA[] =
     "https://omaha-qa.sandbox.google.com/service/update2/json";
+// const char kUpdaterJSONDefaultUrl[] =
+//     "https://tools.google.com/service/update2/json";
+// TODO(tholcombe): make this settable via flag
 const char kUpdaterJSONDefaultUrl[] =
-    "https://tools.google.com/service/update2/json";
+     "http://127.0.0.1:5000/test/omaha/fake";
 const char kCrashUploadURL[] = "https://clients2.google.com/cr/report";
 const char kCrashStagingUploadURL[] =
     "https://clients2.google.com/cr/staging_report";

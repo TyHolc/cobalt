@@ -49,10 +49,13 @@ using update_client::CobaltSlotManagement;
 using update_client::ComponentState;
 
 // The SHA256 hash of the "cobalt_evergreen_public" key.
+// TODO(tholcombe): make this settable via flag. Also, any reason we don't keep this in updater_constants.cc?
 constexpr uint8_t kCobaltPublicKeyHash[] = {
     0x51, 0xa8, 0xc0, 0x90, 0xf8, 0x1a, 0x14, 0xb0, 0xda, 0x7a, 0xfb,
     0x9e, 0x8b, 0x2d, 0x22, 0x65, 0x19, 0xb1, 0xfa, 0xba, 0x02, 0x04,
     0x3a, 0xb2, 0x7a, 0xf6, 0xfe, 0xd5, 0x35, 0xa1, 0x19, 0xd9};
+
+constexpr uint8_t kTylersPublicKeyHash[] {0xA0, 0x3A, 0xCF, 0x02, 0xC0, 0x06, 0x92, 0x5B, 0x3B, 0xA0, 0x8E, 0xEC, 0x18, 0xDF, 0xE2, 0x10, 0x90, 0x7B, 0x29, 0xDF, 0xE1, 0x9F, 0xF9, 0xD9, 0x92, 0x27, 0x83, 0xE6, 0x15, 0xD6, 0xBB, 0x09};
 
 void QuitLoop(base::OnceClosure quit_closure) { std::move(quit_closure).Run(); }
 
@@ -275,7 +278,6 @@ void UpdaterModule::Update() {
     LOG(ERROR) << "Updater failed to get the current update version.";
     return;
   }
-
   update_client_->Update(
       app_ids,
       base::BindOnce(
@@ -286,8 +288,9 @@ void UpdaterModule::Update() {
             component.name = "cobalt";
             component.app_id = ids[0];
             component.version = manifest_version;
-            component.pk_hash.assign(std::begin(kCobaltPublicKeyHash),
-                                     std::end(kCobaltPublicKeyHash));
+            // TODO(tholcombe): custom public key hash switch can be added here.
+            component.pk_hash.assign(std::begin(kTylersPublicKeyHash),
+                                     std::end(kTylersPublicKeyHash));
             component.requires_network_encryption = true;
             component.crx_format_requirement = crx_file::VerifierFormat::CRX3;
             return {component};

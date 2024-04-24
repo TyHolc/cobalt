@@ -94,6 +94,11 @@ std::vector<GURL> Configurator::UpdateUrl() const {
   if (base::CommandLine::ForCurrentProcess()->HasSwitch(
           browser::switches::kUseQAUpdateServer)) {
     return std::vector<GURL>{GURL(kUpdaterJSONDefaultUrlQA)};
+  // TODO(tholcombe): custom update server switch can be checked here.
+  // } else if (base::CommandLine::ForCurrentProcess()->HasSwitch(
+  //         browser::switches::kUseCustomUpdateServer)) {
+  //     return base::CommandLine::ForCurrentProcess()->GetSwitch(
+  //         browser::switches::kUseCustomUpdateServer);
   } else {
     return std::vector<GURL>{GURL(kUpdaterJSONDefaultUrl)};
   }
