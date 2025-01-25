@@ -38,6 +38,9 @@ int main(int argc, const char** argv) {
        "--disable-features=Vulkan",
        // Force some ozone settings.
        "--ozone-platform=starboard", "--use-gl=angle", "--use-angle=gles-egl",
+       // Accelerated GL is blanket disabled for Linux. Ignore the blocklist to
+       // enable it.
+       "--ignore-gpu-blocklist",
        // Set the default size for the content shell/starboard window.
        "--content-shell-host-window-size=1920x1080",
        // Enable remote Devtools access.
